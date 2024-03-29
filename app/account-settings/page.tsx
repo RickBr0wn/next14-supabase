@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import EditableValue from '~/components/editable-value'
 import {
   Card,
@@ -7,6 +10,8 @@ import {
 } from '~/components/ui/card'
 
 export default function Page() {
+  const [value, setValue] = useState<string>('test string')
+
   return (
     <div>
       <Card className="py-10 px-6">
@@ -15,7 +20,7 @@ export default function Page() {
           You should only see this page when logged in!
         </CardDescription>
         <CardContent>
-          <EditableValue />
+          <EditableValue value={value} fn={setValue} />
         </CardContent>
       </Card>
     </div>

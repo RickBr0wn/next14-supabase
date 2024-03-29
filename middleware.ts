@@ -10,15 +10,17 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getSession()
 
   if (!session) {
-    return NextResponse.rewrite(new URL('/login', req.url))
+    return NextResponse.redirect(new URL('/log-in', req.url))
   }
+
+  if (session) console.log('** middleware.ts -> ', session.user.email)
 
   return res
 }
 
 // any route placed in the matcher is excluded from running middleware
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|log-in|sign-up).*)'],
 }
 
 // Path: middleware.ts
